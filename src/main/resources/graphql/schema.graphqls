@@ -1,0 +1,13 @@
+type Query {
+    # A consulta flexível de histórico médico do paciente
+    historicoPaciente(pacienteId: ID!): [Consulta]!
+}
+
+type Consulta {
+    id: ID!
+    pacienteId: ID!
+    profissionalId: ID!
+    dataHora: String!
+    status: String!
+    observacoes: String
+}
