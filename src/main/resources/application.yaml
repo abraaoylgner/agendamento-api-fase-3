@@ -11,10 +11,13 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-spring:
   rabbitmq:
     host: localhost
     port: 5672
     username: guest
     password: guest
+
+api:
+  security:
+    token:
+      secret: chave_super_secreta_tech_challenge
