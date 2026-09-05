@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     // Endpoint de Login deve ser público
-                    req.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
+                    req.requestMatchers("/auth/**").permitAll();
 
                     // Rotas do Serviço de Agendamento (Médicos e Enfermeiros)
                     req.requestMatchers(HttpMethod.POST, "/consultas").hasAnyRole("MEDICO", "ENFERMEIRO");

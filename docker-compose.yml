@@ -1,13 +1,31 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:16
+    platform: linux/amd64
+    container_name: tech_challenge_db
+    environment:
+      POSTGRES_DB: hospital_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sua_senha_aqui
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
   rabbitmq:
     image: rabbitmq:3.13-management
     platform: linux/amd64
-    container_name: rabbitmq-hospital
-    ports:
-      - "5672:5672"   # Porta de comunicação da aplicação
-      - "15672:15672" # Porta do painel de controle (Management)
+    container_name: tech_challenge_rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"   # Porta de comunicação padrão
+      - "15672:15672" # Interface visual de gerenciamento
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
